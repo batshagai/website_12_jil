@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12 жил - Хүүхдийн 3D Аялал</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="canvas-container"></div>
+    <div id="scroll-content"></div>
+
+    <div class="ui-overlay">
+        <!-- ADD SOUND CONTROLS HERE -->
+        <div class="sound-controls">
+            <button class="sound-button" id="toggle-sound" title="Toggle Sound Effects">🔊</button>
+        </div>
+
+        <div class="navigation" id="navigation"></div>
+        <div class="title" id="title"></div>
+        <div class="instructions">Дээш доош гүйлгэж аялах • Товчлуур дээр дарж үсрэх • Дөрвөлжин дүрс дээр дарж эргүүлэх</div>
+        <div class="scroll-indicator">
+            <div class="scroll-progress" id="scroll-progress"></div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="action-button" id="show-all-info">Бүх дүрсийн мэдээлэл</button>
+            <button class="action-button" id="start-game">Тоглоом тоглох</button>
+            <button class="action-button" id="start-quiz">Асуултад хариулах</button>
+            <button class="action-button" id="show-credits">Ашигласан материал</button>
+        </div>
+
+        <div class="info-panel" id="info-panel">
+            <button class="close-button" id="close-info">X</button>
+            <h3 id="info-title">Дүрсийн нэр</h3>
+            <p id="info-description">Тайлбар энд гарч ирнэ</p>
+        </div>
+    </div>
+    <div class="all-info-modal" id="all-info-modal">
+        <div class="all-info-content">
+            <h2>12 жил</h2>
+            <div class="island-grid" id="island-grid">
+                <!-- Дүрсүүдийн мэдээлэл энд динамикаар нэмэгдэнэ -->
+            </div>
+            <button class="close-modal-button" id="close-modal">Хаах</button>
+        </div>
+    </div>
+
+    <div class="game-modal" id="game-modal">
+        <div class="game-content">
+            <h2>12 Жилийн Тоглоом</h2>
+            <div class="score-container">Оноо: <span id="score">0</span></div>
+            <div class="question-container">
+                <h3 id="question-text">Асуулт энд гарч ирнэ</h3>
+                <div class="options-container" id="options-container">
+                    <!-- Сонголтууд энд динамикаар нэмэгдэнэ -->
+                </div>
+            </div>
+            <div class="game-result" id="game-result"></div>
+            <button class="close-modal-button" id="close-game">Тоглоом дуусгах</button>
+        </div>
+    </div>
+ <!-- Ашигласан материал & Гүйцэтгэсэн ажил -->
+    <div class="credits-modal" id="credits-modal">
+        <div class="credits-content">
+            <h2>Ашигласан материал & Гүйцэтгэсэн ажил</h2>
+            <div class="credits-section">
+                <h3>Ашигласан материал:</h3>
+                <ul>
+                    <li>3D моделууд: Sketchfab, Free3D зэрэг вэбсайтуудаас чөлөөтэй татаж авсан</li>
+                    <li>Дуу аялгуу: Mixkit, Freesound зэрэг чөлөөтэй дууны сангууд</li>
+                    <li>График: Three.js, Canvas ашиглан бүтээгдсэн</li>
+                    <li>Фон зургууд: Өөрсдийн зургууд болон чөлөөтэй эрхийн зургууд</li>
+                    <li>Технологи: HTML5, CSS3, JavaScript, Three.js 3D график сан</li>
+                </ul>
+            </div>
+            <div class="credits-section">
+                <h3>Гүйцэтгэсэн ажил:</h3>
+                <p>Энэхүү "12 жилийн 3D аялал" нь 2025 онд Монгол хүүхдүүдэд зориулж бүтээгдсэн. Төсөл нь 3D технологи, фронтенд хөгжүүлэлтийг ашиглан хийгдсэн.</p>
+                <p><strong>Хөгжүүлэгчид: B231880016 Н.Номулан, B241880503 А.Үүрцайх</strong> </p>
+                <p><strong>Зорилго:</strong> Хүүхдүүдэд 12 жилийн тухай мэдлэг олгох, интерактив сургалтын орчин бүрдүүлэх</p>
+                <p><strong>Онцлог:</strong> 3D график, интерактив тоглоом, асуулт-хариулт, VR дэмжлэг</p>
+                <p><strong>Хугацаа:</strong> 2 сар (дизайн, хөгжүүлэлт, туршилт)</p>
+            </div>
+            <button class="close-modal-button" id="close-credits">Хаах</button>
+        </div>
+    </div>
+
+    <div class="quiz-modal" id="quiz-modal">
+        <div class="quiz-content">
+            <h2>12 Жилийн Асуулт-Хариулт</h2>
+            <div class="quiz-progress">Асуулт: <span id="current-question">1</span> / <span id="total-questions">10</span></div>
+            <div class="quiz-question" id="quiz-question">
+                Асуулт энд гарч ирнэ
+            </div>
+            <div class="quiz-options" id="quiz-options">
+                <!-- Хариултын сонголтууд энд динамикаар нэмэгдэнэ -->
+            </div>
+            <div class="quiz-navigation">
+                <button class="quiz-button" id="prev-question">Өмнөх</button>
+                <button class="quiz-button" id="next-question">Дараагийн</button>
+            </div>
+            <button class="close-modal-button" id="close-quiz">Хаах</button>
+        </div>
+    </div>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loading-content">
+            <h2>Ачааллаж байна...</h2>
+            <div class="loading-bar">
+                <div class="loading-progress" id="loading-progress"></div>
+            </div>
+            <div class="loading-text" id="loading-text">Тохируулж байна...</div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
